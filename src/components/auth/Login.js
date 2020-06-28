@@ -12,7 +12,7 @@ const Login = props => {
   //si el usuario se haya registrado o esté repetido
   useEffect(() => {
     if (auth) {
-      props.history.push("/projects");
+      props.history.push("/works");
     }
     if (mesage) {
       showAlert(mesage.msg, mesage.category);

@@ -1,20 +1,20 @@
 import React from "react";
-import NewProject from "../projects/NewProject";
-import ProyectsList from "../projects/ProjectsList";
+
+
 import Nav from "../layout/Nav";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
     <aside>
       <h1>
-        Task<span>Manager</span>
+        Ciclo<span>System</span>
       </h1>
+      <Link to={"clients"} className="btn btn-primario">
+        Clientes
+      </Link>
       <Nav />
-      <NewProject />
-      <div className="proyectos">
-        <h2>Your Projects</h2>
-        <ProyectsList />
-      </div>
+   
     </aside>
   );
 };

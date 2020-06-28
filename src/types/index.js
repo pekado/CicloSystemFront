@@ -1,15 +1,17 @@
-//project types
+//WORK types
 
-export const FORM_PROJECT = "FORM_PROJECT";
-export const GET_PROJECTS = "GET_PROJECTS";
-export const ADD_PROJECT = "ADD_PROJECT";
+export const FORM_WORK = "FORM_WORK";
+export const GET_WORKS = "GET_WORKS";
+export const ADD_WORK = "ADD_WORK";
 export const FORM_VALIDATION = "FORM_VALIDATION";
-export const OPEN_PROJECT = "OPEN_PROJECT";
-export const DELETE_PROJECT = "DELETE_PROJECT";
+export const OPEN_WORK = "OPEN_WORK";
+export const DELETE_WORK = "DELETE_WORK";
+export const WORK_ERROR = "WORK_ERROR";
+export const EDIT_WORK = "EDIT_WORK";
 
 //tasks types
 
-export const PROJECT_TASKS = "PROJECT_TASKS";
+export const WORK_TASKS = "WORK_TASKS";
 export const CREATE_TASK = "CREATE_TASK";
 export const VALIDATE_TASK = "VALIDATE_TASK";
 export const DELETE_TASK = "DELETE_TASK";
@@ -31,4 +33,18 @@ export const LOGIN_SUCCES = "LOGIN_SUCCES";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const LOG_OUT = "LOG_OUT";
 
-export const PROJECT_ERROR = "PROJECT_ERROR";
+//client types
+
+export const FORM_CLIENT = "FORM_PROJECT";
+export const GET_CLIENTS = "GET_CLIENTS";
+export const ADD_CLIENT = "ADD_CLIENT";
+export const CLIENTFORM_VALIDATION = "CLIENTFORM_VALIDATION";
+export const OPEN_CLIENT = "OPEN_CLIENT";
+export const DELETE_CLIENT = "DELETE_CLIENT";
+export const ACTUAL_CLIENT = "ACTUAL_CLIENT";
+export const CLIENT_ERROR = "CLIENT_ERROR";
+export const EDIT_CLIENT = "EDIT_CLIENT";
+export const CLEAR_CLIENT = "CLEAR_CLIENT";
+export const FIND_CLIENT = "FIND_CLIENT";
+export const NEW_WORK = "NEW_WORK";
+export const CLOSE_MODAL = "CLOSE_MODAL"

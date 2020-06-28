@@ -3,21 +3,25 @@ import TasksContext from "./tasksContext";
 import TasksReducer from "./tasksReducer";
 import axiosClient from "../../config/axios";
 import {
-  PROJECT_TASKS,
+  WORK_TASKS,
   CREATE_TASK,
   VALIDATE_TASK,
   DELETE_TASK,
   ACTUAL_TASK,
   EDIT_TASK,
-  CLEAR_TASK
+  CLEAR_TASK,
+  CLOSE_MODAL
 } from "../../types";
+import { stat } from "fs";
 
 const TasksState = props => {
   const initialState = {
-    projecttasks: [],
+    worktasks: [],
     taskerror: false,
     taskstate: false,
-    selectedtask: null
+    selectedtask: null,
+    openModal: false,
+    clientTasks:{}
   };
 
   //crear dispatch y sstate
@@ -26,14 +30,15 @@ const TasksState = props => {
   // funciones
 
   //obtener tareas de un proyecto
-  const getTasks = async project => {
+  const getTasks = async work => {
     try {
       const results = await axiosClient.get("/api/tasks", {
-        params: { project }
+        params: { work }
       });
+      console.log(results)
       dispatch({
-        type: PROJECT_TASKS,
-        payload: results.data.tasks
+        type: WORK_TASKS,
+        payload: results.data
       });
     } catch (error) {
       console.log(error);
@@ -42,7 +47,8 @@ const TasksState = props => {
   //crear tarea al proyecto
   const createTask = async task => {
     try {
-      await axiosClient.post("/api/tasks", task);
+      const result = await axiosClient.post("/api/tasks", task);
+      console.log(result)
       dispatch({
         type: CREATE_TASK,
         payload: task
@@ -65,9 +71,9 @@ const TasksState = props => {
   };
 
   //eliminar tarea por id
-  const deleteTask = async (id, project) => {
+  const deleteTask = async (id, work) => {
     try {
-      await axiosClient.delete(`/api/tasks/${id}`, { params: { project } });
+      await axiosClient.delete(`/api/tasks/${id}`, { params: { work } });
 
       dispatch({
         type: DELETE_TASK,
@@ -98,20 +104,29 @@ const TasksState = props => {
     });
   };
 
+  const closeModal = () => {
+    dispatch({
+      type: CLOSE_MODAL
+    })
+  }
+
   return (
     <TasksContext.Provider
       value={{
-        projecttasks: state.projecttasks,
+        worktasks: state.worktasks,
         taskerror: state.taskerror,
         taskstate: state.taskstate,
         selectedtask: state.selectedtask,
+        clientTasks: state.clientTasks,
+        openModal: state.openModal,
         getTasks,
         createTask,
         validateTask,
         deleteTask,
         actualTask,
         editTask,
-        clearTask
+        clearTask,
+        closeModal
       }}
     >
       {props.children}

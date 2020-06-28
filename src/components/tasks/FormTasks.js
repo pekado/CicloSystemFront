@@ -1,12 +1,12 @@
-import React, { useContext, useState, useEffect } from "react";
-import projectContext from "../../context/projects/projectContext";
+import React, { useContext, useState, useEffect, Fragment } from "react";
+import WorksContext from "../../context/works/worksContext";
 import TasksContext from "../../context/tasks/tasksContext";
 
 const FormTasks = () => {
   //extraer proyecto activo
-  const projectsContext = useContext(projectContext);
+  const worksContext = useContext(WorksContext);
   //deracturing states(de lado izquierdo) y funciones(lado derecho)
-  const { project } = projectsContext;
+  const { work } = worksContext;
 
   //obtener funcion del context de tasks
   const taskContext = useContext(TasksContext);
@@ -17,31 +17,34 @@ const FormTasks = () => {
     getTasks,
     selectedtask,
     editTask,
-    clearTask
+    clearTask,
+    clientTasks
   } = taskContext;
-
+  const { name, phone, email, bike } = clientTasks;
   //effect detecta tarea seleccionada
   useEffect(() => {
     if (selectedtask !== null) {
       setTask(selectedtask);
     } else {
       setTask({
-        name: ""
+        taskName: "",
+        price: ""
       });
     }
   }, [selectedtask]);
   //state form
 
   const [task, setTask] = useState({
-    name: ""
+    taskName: "",
+    price: ""
   });
 
   //obtener nombre del proyecto
-  const { name } = task;
+  const { taskName, price } = task;
   //si no hay proyecto seleccionado
-  if (!project) return null;
+  if (!work) return null;
   //array destructuring para extraer el proyecto actuak
-  const [openProject] = project;
+  const [openWork] = work;
 
   //leer valores del form
   const handleChange = e => {
@@ -54,15 +57,17 @@ const FormTasks = () => {
     try {
       event.preventDefault();
       //validar
-      if (name.trim() === "") {
+      if (taskName.trim() === "" || price === "") {
         validateTask();
         return;
       }
       //revisar si edita o agrega tarea
       if (selectedtask == null) {
         //agregar la nueva taraea
-        task.project = openProject._id;
+        task.work = openWork._id;
+        
         createTask(task);
+        console.log(task)
       } else {
         //actualiza tarea existente
         editTask(task);
@@ -71,40 +76,57 @@ const FormTasks = () => {
       //obtener y filtrar tareas
       //resetear form
       setTask({
-        name: ""
+        taskName: "",
+        price: "",
       });
       setTimeout(() => {
-        getTasks(openProject._id);
+        getTasks(openWork._id);
       }, 1000);
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div className="formulario">
-      <form onSubmit={onSubmit}>
-        <div className="contenedor-input">
-          <input
-            type="text"
-            className="input-text"
-            placeholder="New Task"
-            name="name"
-            onChange={handleChange}
-            value={name}
-          />
-        </div>
-        <div className="contenedor-input">
-          <input
-            type="submit"
-            className="btn btn-primario btn-submit btn-block"
-            value={selectedtask ? "Edit task" : "Add task"}
-          />
-        </div>
-      </form>
-      {taskerror ? (
-        <p className="mensaje error">Give your task a name, please.</p>
-      ) : null}
-    </div>
+    <Fragment>
+      <div className="flex">
+      <div>
+        <p>Cliente: {name}</p>
+        <p>Teléfono: {phone}</p>
+        <p>Email: {email}</p>
+        <p>Bicicleta: {bike}</p>
+      </div>
+        <form onSubmit={onSubmit}>
+          <div className="margin-sides">
+            <input
+              type="text"
+              className="input-text input-margin "
+              placeholder="New Task"
+              name="taskName"
+              onChange={handleChange}
+              value={taskName}
+            />
+             <input
+              type="number"
+              className="input-text input-margin"
+              placeholder="Precio"
+              name="price"
+              onChange={handleChange}
+              value={price}
+            />
+          </div>
+          <div className="contenedor-input margin-sides">
+            <input
+              type="submit"
+              className="btn btn-primario btn-submit btn-block"
+              value={selectedtask ? "Edit task" : "Add task"}
+            />
+          </div>
+        </form>
+        {taskerror ? (
+          <p className="mensaje error">Give your task a name, please.</p>
+        ) : null}
+      </div>
+    </Fragment>
   );
 };
 

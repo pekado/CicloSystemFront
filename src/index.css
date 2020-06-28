@@ -1,7 +1,6 @@
 :root {
- 
   --gris2: #2f3848;
- 
+
   --headingFont: "Exo 2", sans-serif;
   --textFont: "Exo 2", sans-serif;
   --cyan: ;
@@ -56,6 +55,18 @@ ul {
 a {
   text-decoration: none;
   color: var(--gris2);
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 40px;
+  margin-bottom: 20px;
+}
+
+.input-margin {
+  margin: 1.5rem 0rem;
 }
 
 /** BOTONES **/
@@ -128,7 +139,7 @@ a {
   .seccion-principal {
     flex: 1;
   }
-  .campo-form{
+  .campo-form {
     display: block;
   }
 }
@@ -149,7 +160,6 @@ aside {
 .formulario-nuevo-proyecto .input-text {
   border-bottom: 1px solid var(--gris2);
   border-radius: 0.5rem;
-
 }
 .formulario-nuevo-proyecto .input-text::placeholder {
   color: var(--gris2);
@@ -385,11 +395,35 @@ aside {
   background-color: rgb(170, 0, 0);
   color: rgba(42, 42, 46, 1);
 }
-@media only screen and (max-width: 600px){
-  .campo-form{
+@media only screen and (max-width: 600px) {
+  .campo-form {
     display: block;
   }
-  .campo-form input{
+  .campo-form input {
     margin: 1rem;
   }
 }
+.tarea #cliente {
+  width: 100%;
+}
+#botonTrabajo{
+  float: right;
+  margin: 10px;
+}
+
+#botonClientes {
+  height: 100px;
+
+}
+#botonClientes a {
+  float: right;
+}
+.input-clientes{
+  width: 400px;
+}
+
+.margin-sides{
+  margin: 0 5%;
+}
+
+

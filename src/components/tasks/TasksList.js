@@ -1,32 +1,45 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import projectContext from "../../context/projects/projectContext";
+import WorksContext from "../../context/works/worksContext";
 import TasksContext from "../../context/tasks/tasksContext";
-import Task from "./Task";
+import Task from "./Task"; 
 
 const TasksList = () => {
   //obtener state de proyectos
-  const projectsContext = useContext(projectContext);
+  const worksContext = useContext(WorksContext);
   //deracturing states(de lado izquierdo) y funciones(lado derecho)
-  const { project, deleteProject } = projectsContext;
-
-  //obtener tasks del projecto
+  const { work, deleteWork, editWork } = worksContext;
+ 
+  //obtener tasks del trabajo
   const taskContext = useContext(TasksContext);
-  const { projecttasks } = taskContext;
-  if (!project) return <h2>Pick a project</h2>;
+  const { worktasks } = taskContext;
+  const [totalPrice, setTotalPrice] = useState("")
+  useEffect(() => {
+    const totalCost = () =>{
+      if(worktasks.length !== 0){
+        const prices = worktasks.map(task => task.price)
+        const add = (a, b) => a + b; 
+        const sum = prices.reduce(add)
+        setTotalPrice(sum)
+      }
+    }
+    totalCost()
+  }, [worktasks]);
+  if (!work) return <h2>Pick a work</h2>;
   //array destructuring para extraer el proyecto actual
-  const [openProject] = project;
+  const [openWork] = work;
+
   return (
     <Fragment>
-      <h1>Project: {openProject.name}</h1>
+      <h1>El costo total es: {totalPrice}</h1>
       <ul className="listado-tareas">
-        {projecttasks === [] || undefined ? (
+        {worktasks === [] || undefined ? (
           <li className="tarea">
             <p>No tasks yet</p>
           </li>
         ) : (
           <TransitionGroup>
-            {projecttasks.map(task => (
+            {worktasks.map(task => (
               <CSSTransition 
                 key={task.id} 
                 timeout={300} 
@@ -36,13 +49,26 @@ const TasksList = () => {
             ))}
           </TransitionGroup>
         )}
+        <div className="flex">
+
         <button
           type="button"
           className="btn btn-primario"
-          onClick={() => deleteProject(openProject._id)}
+          onClick={() => deleteWork(openWork._id)}
         >
-          Delete Project
+         Borrar Trabajo
         </button>
+        <div>
+        <button
+          type="button"
+          className="btn btn-primario"
+          onClick={() => editWork(openWork._id, {state: true})}
+        >
+          Trabajo Completo
+        </button>
+
+        </div>
+        </div>
       </ul>
     </Fragment>
   );

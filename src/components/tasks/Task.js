@@ -1,21 +1,22 @@
 import React, { useContext } from "react";
-import projectContext from "../../context/projects/projectContext";
+import WorksContext from "../../context/works/worksContext";
 import TasksContext from "../../context/tasks/tasksContext";
 
 const Task = ({ task }) => {
   //extraer proyecto activo
-  const projectsContext = useContext(projectContext);
+  const worksContext = useContext(WorksContext);
   //deracturing states(de lado izquierdo) y funciones(lado derecho)
-  const { project } = projectsContext;
+  const { work } = worksContext;
   //obtener funcion del context de tasks
   const taskContext = useContext(TasksContext);
   const { deleteTask, getTasks, editTask, actualTask } = taskContext;
   //destructuring
-  const [actualProject] = project;
+  const [actualWork] = work;
   //funcion para eliminar tarea
   const selectedTask = id => {
-    deleteTask(id, actualProject._id); //id de la tarea
-    getTasks(actualProject._id); //id del proyecto
+    console.log(id)
+    deleteTask(id, actualWork._id); //id de la tarea
+    getTasks(actualWork._id); //id del proyecto
   };
 
   //cambiar estado de tarea
@@ -30,10 +31,12 @@ const Task = ({ task }) => {
   //agrega tarea actual cuando el usuario quiere editarla
   const selectTask = task => {
     actualTask(task);
+    console.log()
   };
   return (
     <li className="tarea sombra">
-      <p>{task.name}</p>
+      <p>{task.taskName}</p>
+      <p>{task.price}</p>
       <div className="estado">
         {task.state ? (
           <button

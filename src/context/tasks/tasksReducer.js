@@ -1,26 +1,29 @@
 //importo types para el switch
 import {
-  PROJECT_TASKS,
+  WORK_TASKS,
   CREATE_TASK,
   VALIDATE_TASK,
   DELETE_TASK,
   ACTUAL_TASK,
   EDIT_TASK,
-  CLEAR_TASK
+  CLEAR_TASK,
+  CLOSE_MODAL
 } from "../../types";
 //creo un switch para cada case, al caer en uno actualiza states iniciales.
 export default (state, action) => {
   switch (action.type) {
-    case PROJECT_TASKS:
+    case WORK_TASKS:
       return {
         ...state,
-        projecttasks: action.payload
+        worktasks: action.payload.tasks,
+        clientTasks: action.payload.currentClient,
+        openModal: true
       };
     case CREATE_TASK:
       return {
         ...state,
         taskerror: false,
-        // projecttasks: [action.payload, ...state.projecttasks]
+        // worktasks: [action.payload, ...state.worktasks]
       };
     case VALIDATE_TASK:
       return {
@@ -30,7 +33,7 @@ export default (state, action) => {
     case DELETE_TASK:
       return {
         ...state,
-        projecttasks: state.projecttasks.filter(task => task._id !== action.payload)
+        worktasks: state.worktasks.filter(task => task._id !== action.payload)
       };
     case ACTUAL_TASK:
       return {
@@ -40,7 +43,7 @@ export default (state, action) => {
     case EDIT_TASK:
       return {
         ...state,
-        projecttasks: state.projecttasks.map(task =>
+        worktasks: state.worktasks.map(task =>
           task._id === action.payload._id ? action.payload : task
         ),
         selectedtask: null
@@ -50,6 +53,11 @@ export default (state, action) => {
           ...state,
           selectedtask: null
         }
+        case CLOSE_MODAL:
+          return{
+            ...state,
+            openModal: false
+          }
     default:
       return state;
   }

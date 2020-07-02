@@ -16,8 +16,6 @@ export default (state, action) => {
         form: true
       };
     case GET_WORKS:
-      console.log(
-        action.payload.filter(work => work.state === true))
       return {
         ...state,
         works: action.payload,
@@ -28,7 +26,8 @@ export default (state, action) => {
       return {
         ...state,
         form: false,
-        formError: false
+        formError: false,
+        newWorkId: action.payload._id
       };
     case FORM_VALIDATION:
       return {

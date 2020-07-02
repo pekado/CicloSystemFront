@@ -22,6 +22,7 @@ const WorksState = props => {
     newWorkForm: false,
     formError: false,
     work: null,
+    newWorkId: null,
     message: null
   };
   //dispatch para ejecutar acciones
@@ -54,9 +55,11 @@ const WorksState = props => {
   //agregar proyecto
   const addWork = async work => {
     try {
-      await axiosClient.post('/api/works', work)
+       const results = await axiosClient.post('/api/works', work)
+       console.log(results)
       dispatch({
         type: ADD_WORK,
+        payload: results.data
       });
     } catch (error) {
       const alert = {
@@ -127,6 +130,7 @@ const WorksState = props => {
         formError: state.formError,
         work: state.work,
         message: state.message,
+        newWorkId: state.newWorkId,
         showForm,
         getWorks,
         addWork,

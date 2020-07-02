@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, Fragment } from "react";
 import ClientContext from "../../context/clients/ClientContext";
 
 const Client = ({ client }) => {
@@ -24,7 +24,7 @@ const Client = ({ client }) => {
     actualClient(client);
   };
   return (
-    <tr>
+    <Fragment>
     <td ><span>Nombre</span> {client.name}</td>
     <td><span>Teléfono</span> {client.name}</td>
     <td><span>Email</span> {client.email}</td>
@@ -51,7 +51,8 @@ const Client = ({ client }) => {
           >
             Seleccionar
           </button></td>)}
-</tr>
+          
+</Fragment>
 
   );
 };

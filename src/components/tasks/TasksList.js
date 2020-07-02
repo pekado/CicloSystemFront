@@ -8,11 +8,11 @@ const TasksList = () => {
   //obtener state de proyectos
   const worksContext = useContext(WorksContext);
   //deracturing states(de lado izquierdo) y funciones(lado derecho)
-  const { work, deleteWork, editWork } = worksContext;
+  const { work, deleteWork, editWork, getWorks } = worksContext;
  
   //obtener tasks del trabajo
   const taskContext = useContext(TasksContext);
-  const { worktasks } = taskContext;
+  const { worktasks, closeModal } = taskContext;
   const [totalPrice, setTotalPrice] = useState("")
   useEffect(() => {
     const totalCost = () =>{
@@ -25,6 +25,22 @@ const TasksList = () => {
     }
     totalCost()
   }, [worktasks]);
+
+  const toDelete = id =>{
+    deleteWork(id)
+    closeModal()
+    setTimeout(() => {
+      getWorks()
+    }, 1000);
+  }
+  const finishWork = id => {
+    editWork(id, {state: true})
+    closeModal()
+    setTimeout(() => {
+      getWorks()
+    }, 1000);
+
+  }
   if (!work) return <h2>Pick a work</h2>;
   //array destructuring para extraer el proyecto actual
   const [openWork] = work;
@@ -54,7 +70,7 @@ const TasksList = () => {
         <button
           type="button"
           className="btn btn-primario"
-          onClick={() => deleteWork(openWork._id)}
+          onClick={() => toDelete(openWork._id)}
         >
          Borrar Trabajo
         </button>
@@ -62,7 +78,7 @@ const TasksList = () => {
         <button
           type="button"
           className="btn btn-primario"
-          onClick={() => editWork(openWork._id, {state: true})}
+          onClick={() => finishWork(openWork._id)}
         >
           Trabajo Completo
         </button>

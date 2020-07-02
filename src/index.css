@@ -377,10 +377,7 @@ aside {
 }
 
 .enlace-cuenta {
-  margin-top: 2rem;
-  display: block;
-  opacity: 0.7;
-  color: whitesmoke;
+  margin: 2rem 2rem;
 }
 .alerta {
   padding: 2rem;

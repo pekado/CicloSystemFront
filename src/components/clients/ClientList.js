@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext, Fragment } from "react";
+import Pagination from "pagination-react-hooks";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import ClientContext from "../../context/clients/ClientContext";
 import AlertContext from "../../context/alerts/AlertContext";
 import Client from "./Client";
 import "../styles/table.css";
-
 
 const ClientList = () => {
   const clientContext = useContext(ClientContext);
@@ -17,49 +17,35 @@ const ClientList = () => {
 
     //eslint-disable-next-line
   }, []);
- 
+
+  const show = value => (
+    <tr>
+      <Client client={value} />
+    </tr>
+  );
   return (
     <table>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Email</th>
-              <th>Teléfono</th>
-              <th>Bicicleta</th>
-              <th>Opciones</th>
-            </tr>
-            
-        {filteredClients.length === 0 ? 
-        ( <Fragment> {clients.map(client => 
-              <CSSTransition
-                  key={client._id}
-                  timeout={300} 
-                >
-              <Client  client={client} />
-              </CSSTransition>
-            )} 
-            </Fragment>)
-            :
-           ( <Fragment>
-              {filteredClients.map(client => (
-                <CSSTransition
-                  key={client._id}
-                  timeout={300}
-                  
-                >
-                  <Client  client={client} />
-                </CSSTransition>
-              ))}
-              </Fragment>)
-        }
-     
-          </thead>
-          <tbody></tbody>
-          {alert ? (
-            <div className={`alerta ${alert.category}`}>{alert.msg}</div>
-          ) : null}
-        </table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Bicicleta</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
 
+      <Pagination
+        data={filteredClients.length === 0 ? clients : filteredClients}
+        Show={show}
+        displayNumber="20"
+        previousText="Anterior"
+        nextText="Siguiente"
+      />
+      {alert ? (
+        <div className={`alerta ${alert.category}`}>{alert.msg}</div>
+      ) : null}
+    </table>
   );
 };
 

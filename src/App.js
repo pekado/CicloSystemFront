@@ -1,5 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import TransitionSwitch from 'react-router-transition-switch'
+import Fader from 'react-fader'
 import Login from "./components/auth/Login";
 import NewAccount from "./components/auth/NewAccount";
 import Works from "./components/works/Works";
@@ -26,12 +28,12 @@ function App() {
           <AlertState>
             <AuthState>
               <Router>
-                <Switch>
+                <TransitionSwitch component={Fader}>
                   <Route exact path="/" component={Login} />
                   <Route exact path="/new-account" component={NewAccount} />
                   <PrivateRoute exact path="/works" component={Works} />
                   <PrivateRoute exact path="/clients" component={Clients} />
-                </Switch>
+                </TransitionSwitch>
               </Router>
             </AuthState>
           </AlertState>

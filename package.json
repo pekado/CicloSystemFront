@@ -13,7 +13,10 @@
     "pagination-react-hooks": "^1.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-fade-in": "^1.1.0",
+    "react-fader": "^3.1.1",
     "react-router-dom": "^5.1.2",
+    "react-router-transition-switch": "^1.1.2",
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.4.1"
   },

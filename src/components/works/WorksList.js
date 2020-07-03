@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
+import FadeIn from "react-fade-in";
 import AlertContext from "../../context/alerts/AlertContext";
 import Work from "./Work";
 import WorksContext from "../../context/works/worksContext";
@@ -9,7 +10,13 @@ import "../styles/table.css";
 const WorksList = () => {
   //obtener state
   const worksContext = useContext(WorksContext);
-  const { message, works, getWorks, unfinishedWorks, finishedWorks } = worksContext;
+  const {
+    message,
+    works,
+    getWorks,
+    unfinishedWorks,
+    finishedWorks
+  } = worksContext;
   const authContext = useContext(AuthContext);
   const { userAuth, logOut } = authContext;
 
@@ -28,10 +35,12 @@ const WorksList = () => {
     //eslint-disable-next-line
   }, [message]);
   //revisar si hay Works
+  
   return (
     <div>
-    <h1>Trabajos Pendientes</h1>
+      <h1>Trabajos Pendientes</h1>
       {unfinishedWorks.length !== 0 ? (
+        <FadeIn delay={300} transitionDuration={700}>
         <table>
           <thead>
             <tr>
@@ -42,20 +51,20 @@ const WorksList = () => {
               <th>Entrega</th>
               <th>Hora de Entrega</th>
             </tr>
-            {unfinishedWorks.map(work => (
-              <CSSTransition key={work._id} timeout={300} classNames="tarea">
-                <Work work={work} />
-              </CSSTransition>
-            ))}
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {unfinishedWorks.map(work => (
+              <Work work={work} key={work._id}/>
+            ))}
+          </tbody>
         </table>
-        
+        </FadeIn>
       ) : (
         <p>No works yet</p>
       )}
       <h1>Trabajos Finalizados</h1>
       {finishedWorks.length !== 0 ? (
+        <FadeIn delay={300} transitionDuration={700}>
         <table>
           <thead>
             <tr>
@@ -66,15 +75,14 @@ const WorksList = () => {
               <th>Entrega</th>
               <th>Hora de Entrega</th>
             </tr>
-            {finishedWorks.map(work => (
-              <CSSTransition key={work._id} timeout={300} classNames="tarea">
-                <Work work={work} />
-              </CSSTransition>
-            ))}
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {finishedWorks.map(work => (
+              <Work work={work} />
+            ))}
+          </tbody>
         </table>
-        
+        </FadeIn>
       ) : (
         <p>No works yet</p>
       )}

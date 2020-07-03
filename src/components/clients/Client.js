@@ -24,9 +24,9 @@ const Client = ({ client }) => {
     actualClient(client);
   };
   return (
-    <Fragment>
+    <Fragment key={client._id}>
     <td ><span>Nombre</span> {client.name}</td>
-    <td><span>Teléfono</span> {client.name}</td>
+    <td><span>Teléfono</span> {client.phone}</td>
     <td><span>Email</span> {client.email}</td>
     <td><span>Bicicleta</span> {client.bike}</td>
     {!newWork ?

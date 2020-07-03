@@ -21,7 +21,7 @@ const WorksState = props => {
     unfinishedWorks: [],
     newWorkForm: false,
     formError: false,
-    work: null,
+    work: {},
     newWorkId: null,
     message: null
   };

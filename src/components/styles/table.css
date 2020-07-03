@@ -3,6 +3,7 @@ table {
     text-align: left;
     width: 100%;
     margin: 50px 0;
+    box-sizing: border-box;
 }
 table tr {
     cursor: pointer;
@@ -24,6 +25,10 @@ table td span {
     left: 0;
 }
 
+
+  
+  
+  
 /* Simple CSS for flexbox table on mobile */
 @media(max-width: 800px) {
     table thead {

@@ -92,9 +92,9 @@ const NewWork = () => {
       entregaHora: "",
       cliente: ""
     });
-    //  setTimeout(() => {
+     setTimeout(() => {
     getWorks();
-    // }, 1000);
+    }, 1000);
     setShow(false);
   };
   const seeForm = () => {
@@ -106,8 +106,6 @@ const NewWork = () => {
       const result = allTasks.map(task =>
         Object.assign(task, { work: newWorkId })
       );
-      console.log(allTasks)
-      console.log(result);
       createTask(result);
       setAllTasks([]);
       setNewTasks({});
@@ -127,7 +125,7 @@ const NewWork = () => {
         className={show ? "overlay" : "hide"}
         onClick={() => setShow(false)}
       />
-      <div className={show ? "modal" : "hide"}>
+      <div className={show ? "modal fade-in-bottom" : "hide fade-in-bottom"}>
         <div className="flex margin-sides">
           <button onClick={() => setShow(false)}>X</button>
           {!show && <button onClick={() => setShow(true)}>Show modal</button>}
@@ -150,14 +148,14 @@ const NewWork = () => {
           )}
         </div>
         {newClient ? (
-          <div className="formulario">
+          <div className="formulario fade-in-bottom">
             <NewClient />
           </div>
         ) : (
-          <div>
+          <div className="fade-in-bottom">
             {selectedClient !== null ? (
               <Fragment>
-                <div className="contenedor-tareas">
+                <div className="contenedor-tareas fade-in-bottom">
                   <div className="flex margin-sides">
                     <div>
                       <h4>Cliente: {selectedClient.name}</h4>
@@ -244,7 +242,7 @@ const NewWork = () => {
             ) : (
               <Fragment>
                 <h1>Seleccionar Cliente</h1>
-                <div>
+                <div className="fade-in-bottom">
                   <ClientSearch />
                 </div>
                 <ClientList />

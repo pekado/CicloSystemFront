@@ -12,7 +12,6 @@ import {
   CLEAR_TASK,
   CLOSE_MODAL
 } from "../../types";
-import { stat } from "fs";
 
 const TasksState = props => {
   const initialState = {

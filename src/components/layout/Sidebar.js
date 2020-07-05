@@ -1,4 +1,5 @@
 import React from "react";
+import Reminders from '../reminders/Reminders'
 
 
 import Nav from "../layout/Nav";
@@ -13,6 +14,7 @@ const Sidebar = () => {
       <Link to={"clients"} className="btn btn-primario">
         Clientes
       </Link>
+      <Reminders/>
       <Nav />
    
     </aside>

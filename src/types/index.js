@@ -47,4 +47,15 @@ export const EDIT_CLIENT = "EDIT_CLIENT";
 export const CLEAR_CLIENT = "CLEAR_CLIENT";
 export const FIND_CLIENT = "FIND_CLIENT";
 export const NEW_WORK = "NEW_WORK";
-export const CLOSE_MODAL = "CLOSE_MODAL"
+export const CLOSE_MODAL = "CLOSE_MODAL";
+export const SEND_EMAIL = "SEND_EMAIL";
+
+//reminder types
+export const GET_REMINDERS = "GET_REMINDERS";
+export const CREATE_REMINDER = "CREATE_REMINDER";
+export const DELETE_REMINDER = "DELETE_REMINDER";
+export const UPDATE_REMINDER = "UPDATE_REMINDER";
+export const REMINDER_ERROR = "REMINDER_ERROR";
+export const VALIDATE_REMINDER = "VALIDATE_REMINDER";
+export const CLEAR_REMINDER = "CLEAR_REMINDER";
+export const SELECT_REMINDER = "SELECT_REMINDER";

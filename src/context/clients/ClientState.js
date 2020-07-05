@@ -14,7 +14,8 @@ import {
   EDIT_CLIENT,
   CLEAR_CLIENT,
   FIND_CLIENT,
-  NEW_WORK
+  NEW_WORK,
+  SEND_EMAIL
 } from "../../types";
 
 const ClientState = props => {
@@ -138,6 +139,13 @@ const ClientState = props => {
     dispatch({
       type: NEW_WORK,
       payload: condition
+    })
+  }
+
+  const sendEmail = (email) => {
+    dispatch({
+      type: SEND_EMAIL,
+      payload: email
     })
   }
   return (

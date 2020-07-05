@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import TransitionSwitch from 'react-router-transition-switch'
-import Fader from 'react-fader'
+import TransitionSwitch from "react-router-transition-switch";
+import Fader from "react-fader";
 import Login from "./components/auth/Login";
 import NewAccount from "./components/auth/NewAccount";
 import Works from "./components/works/Works";
@@ -11,6 +11,7 @@ import TasksState from "./context/tasks/tasksState";
 import AlertState from "./context/alerts/AlertState";
 import AuthState from "./context/auth/authState";
 import ClientState from "./context/clients/ClientState";
+import RemindersState from "./context/reminders/RemindersState";
 import tokenAuth from "./config/tokenAuth";
 import PrivateRoute from "./components/routes/PrivateRoute";
 
@@ -24,20 +25,22 @@ function App() {
   return (
     <ClientState>
       <WorksState>
-        <TasksState>
-          <AlertState>
-            <AuthState>
-              <Router>
-                <TransitionSwitch component={Fader}>
-                  <Route exact path="/" component={Login} />
-                  <Route exact path="/new-account" component={NewAccount} />
-                  <PrivateRoute exact path="/works" component={Works} />
-                  <PrivateRoute exact path="/clients" component={Clients} />
-                </TransitionSwitch>
-              </Router>
-            </AuthState>
-          </AlertState>
-        </TasksState>
+        <RemindersState>
+          <TasksState>
+            <AlertState>
+              <AuthState>
+                <Router>
+                  <TransitionSwitch component={Fader}>
+                    <Route exact path="/" component={Login} />
+                    <Route exact path="/new-account" component={NewAccount} />
+                    <PrivateRoute exact path="/works" component={Works} />
+                    <PrivateRoute exact path="/clients" component={Clients} />
+                  </TransitionSwitch>
+                </Router>
+              </AuthState>
+            </AlertState>
+          </TasksState>
+        </RemindersState>
       </WorksState>
     </ClientState>
   );

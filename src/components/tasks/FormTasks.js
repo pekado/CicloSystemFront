@@ -62,12 +62,11 @@ const FormTasks = () => {
         return;
       }
       //revisar si edita o agrega tarea
-      if (selectedtask == null) {
+      if (selectedtask === null) {
         //agregar la nueva taraea
         task.work = openWork._id;
         
         createTask(task);
-        console.log(task)
       } else {
         //actualiza tarea existente
         editTask(task);

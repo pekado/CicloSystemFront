@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState, Fragment } from "react";
 import Sidebar from "../layout/Sidebar";
+
 import Tasks from "../tasks/Tasks";
 import TasksList from "../tasks/TasksList";
 import WorksList from "./WorksList";
@@ -26,14 +27,14 @@ const Works = () => {
   }, []);
   return (
     <div className="contenedor-app">
-      <Sidebar />
-
+        <Sidebar />
+        
       <div className="seccion-principal">
-          <NewWork />
+        <NewWork />
         <main>
           <Fragment>
-           <Tasks/>
-            <div className="proyectos">
+            <Tasks />
+            <div>
               <WorksList />
             </div>
           </Fragment>

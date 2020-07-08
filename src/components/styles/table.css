@@ -1,9 +1,14 @@
 table {
-    border-collapse: collapse;
+    
     text-align: left;
     width: 100%;
     margin: 50px 0;
     box-sizing: border-box;
+}
+th{
+    box-shadow: 0 1px 2px rgb(0, 0, 0);
+    /* border-top: 1.5px solid black; */
+    /* border-left: 1.5px solid black; */
 }
 table tr {
     cursor: pointer;
@@ -12,6 +17,7 @@ table tr {
 }
 table th, table td {
     padding: 10px 20px;
+    border-right: 1.5px solid black;
 }
 table td span {
     color: dimgrey;

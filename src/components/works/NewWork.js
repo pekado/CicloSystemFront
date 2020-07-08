@@ -2,6 +2,7 @@ import React, { Fragment, useState, useContext, useEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import WorksContext from "../../context/works/worksContext";
 import ClientSearch from "../clients/ClientSearch";
+import Nav from "../layout/Nav";
 import ClientContext from "../../context/clients/ClientContext";
 import TasksContext from "../../context/tasks/tasksContext";
 import ClientList from "../clients/ClientList";
@@ -92,8 +93,8 @@ const NewWork = () => {
       entregaHora: "",
       cliente: ""
     });
-     setTimeout(() => {
-    getWorks();
+    setTimeout(() => {
+      getWorks();
     }, 1000);
     setShow(false);
   };
@@ -113,19 +114,22 @@ const NewWork = () => {
   }, [newWorkId]);
   return (
     <Fragment>
-      <button
-        type="button"
-        className="btn btn-primario"
-        onClick={seeForm}
-        id="botonTrabajo"
-      >
-        Crear un nuevo Trabajo
-      </button>
+      <div className="flex navbuttons">
+        <Nav />
+        <button
+          type="button"
+          className="btn btn-primario"
+          onClick={seeForm}
+          id="botonTrabajo"
+        >
+          Crear un nuevo Trabajo
+        </button>
+      </div>
       <div
         className={show ? "overlay" : "hide"}
         onClick={() => setShow(false)}
       />
-      <div className={show ? "modal fade-in-bottom" : "hide fade-in-bottom"}>
+      <div className={show ? "fade-in-bottom" : "hide"}>
         <div className="flex margin-sides">
           <button onClick={() => setShow(false)}>X</button>
           {!show && <button onClick={() => setShow(true)}>Show modal</button>}
@@ -148,14 +152,14 @@ const NewWork = () => {
           )}
         </div>
         {newClient ? (
-          <div className="formulario fade-in-bottom">
+          <div className="formulario ">
             <NewClient />
           </div>
         ) : (
-          <div className="fade-in-bottom">
+          <div className="">
             {selectedClient !== null ? (
               <Fragment>
-                <div className="contenedor-tareas fade-in-bottom">
+                <div className="contenedor-tareas ">
                   <div className="flex margin-sides">
                     <div>
                       <h4>Cliente: {selectedClient.name}</h4>
@@ -242,7 +246,7 @@ const NewWork = () => {
             ) : (
               <Fragment>
                 <h1>Seleccionar Cliente</h1>
-                <div className="fade-in-bottom">
+                <div className="">
                   <ClientSearch />
                 </div>
                 <ClientList />

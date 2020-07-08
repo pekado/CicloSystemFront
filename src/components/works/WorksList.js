@@ -18,13 +18,13 @@ const WorksList = () => {
     finishedWorks
   } = worksContext;
   const authContext = useContext(AuthContext);
-  const { userAuth, logOut } = authContext;
+  
 
   const alertContext = useContext(AlertContext);
   const { alert, showAlert } = alertContext;
 
   useEffect(() => {
-    userAuth();
+
     getWorks();
     //eslint-disable-next-line
   }, []);
@@ -52,7 +52,7 @@ const WorksList = () => {
               <th>Hora de Entrega</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="shadow-drop-br">
             {unfinishedWorks.map(work => (
               <Work work={work} key={work._id}/>
             ))}
@@ -67,7 +67,7 @@ const WorksList = () => {
         <FadeIn delay={300} transitionDuration={700}>
         <table>
           <thead>
-            <tr>
+            <tr >
               <th>Fecha de Ingreso</th>
               <th>Bicicleta</th>
               <th>Nombre</th>
@@ -78,7 +78,7 @@ const WorksList = () => {
           </thead>
           <tbody>
             {finishedWorks.map(work => (
-              <Work work={work} />
+              <Work work={work} key={work._id}/>
             ))}
           </tbody>
         </table>
@@ -89,9 +89,7 @@ const WorksList = () => {
       {alert ? (
         <div className={`alerta ${alert.category}`}>{alert.msg}</div>
       ) : null}
-      <button className="btn btn-block btn-primario" onClick={() => logOut()}>
-        Log Out
-      </button>
+      
     </div>
   );
 };

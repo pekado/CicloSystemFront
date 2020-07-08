@@ -17,7 +17,7 @@ const Tasks = () => {
           className="overlay"
           onClick={() => closeModal()}
         />
-          <div className="modal">
+          <div className="puff-in-center">
             <button onClick={closeModal}>X</button>
             <div className="contenedor-tareas">
               <FormTasks />

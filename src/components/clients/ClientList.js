@@ -19,7 +19,7 @@ const ClientList = () => {
     //eslint-disable-next-line
   }, []);
 
-  const show = value =><tr><Client client={value} key={value._id} /></tr>;
+  const show = value =><tr className="box" ><Client client={value} key={value._id} /></tr>;
   return (
     <FadeIn delay={300} transitionDuration={700}>
     <table>

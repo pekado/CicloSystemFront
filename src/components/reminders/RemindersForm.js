@@ -14,6 +14,7 @@ const RemindersForm = () => {
   } = ReminderContext;
 
   const [newReminder, setNewReminder] = useState({ body: "" });
+  const [show, setShow] = useState(false);
 
   const { body } = newReminder;
 
@@ -59,16 +60,21 @@ const RemindersForm = () => {
     <form onSubmit={sendReminder}>
       <input
         type="text"
-        className="input-text input-margin "
+        className={show ? "input-text input-margin " : "hide"}
         placeholder="A Recordar"
         name="body"
         value={body}
         onChange={handleChange}
       />
-      <button type="submit" className="btn btn-secundario">
-        {" "}
-        Nuevo Recordatorio
-      </button>
+      {show ? (
+        <button type="submit" className="btn btn-secundario">
+          Crear Recordatorio
+        </button>
+      ) : (
+        <a onClick={() => setShow(true)} className="btn btn-secundario">
+          Nuevo Recordatorio
+        </a>
+      )}
       {remindererror ? (
         <p className="alerta-error alerta">Recordatorio vacío</p>
       ) : null}
